@@ -1,136 +1,171 @@
-# Team Task Board – Todo-Liste
+# Team Task Board - Todo-Liste
 
-## Phase 1: Projekt-Setup (20 min)
+Stand: Aktueller Projektzustand
 
-- [ ] Node.js ist installiert (✅ bereits erledigt)
-- [ ] Vite-Projekt erstellen: `npm create vite@latest team-task-board -- --template react`
-- [ ] In den Projektordner wechseln: `cd team-task-board`
-- [ ] Abhängigkeiten installieren: `npm install`
-- [ ] Entwicklungsserver starten: `npm run dev`
-- [ ] Browser öffnen → `http://localhost:5173/` funktioniert
+## Aktuell vorhanden
 
----
+- [x] Vite/React-Projekt ist erstellt
+- [x] Abhängigkeiten sind installiert
+- [x] Entwicklungsserver kann mit `npm run dev` gestartet werden
+- [x] Tailwind CSS ist eingebunden
+- [x] DaisyUI ist eingebunden
+- [x] `src/App.css` ist leer
+- [x] `src/index.css` importiert Tailwind und DaisyUI
+- [x] Komponentenordner sind angelegt
+- [x] `Header.jsx` ist erstellt
+- [x] `Header` wird in `App.jsx` importiert und gerendert
+- [x] `Header` bekommt die Props `total` und `done`
+- [x] Grundlayout in `App.jsx` ist vorbereitet
 
-## Phase 2: Boilerplate bereinigen (10 min)
+## Aktueller Zustand der Dateien
 
-- [ ] `src/App.jsx` – Inhalt durch einfaches `<h1>Team Task Board</h1>` ersetzen
-- [ ] `src/App.css` – Inhalt komplett löschen (Datei behalten)
-- [ ] `src/index.css` – Inhalt leeren oder für globale Styles behalten
-- [ ] `src/assets/` – Ordner löschen
+- [x] `src/App.jsx` rendert den Header und ein vorbereitetes Main-Layout
+- [x] `src/components/Header/Header.jsx` enthält Titel, Beschreibung und Statistik-Anzeige
+- [ ] `src/components/TaskForm/TaskForm.jsx` ist noch leer
+- [ ] `src/components/TaskList/TaskList.jsx` ist noch leer
+- [ ] `src/components/TaskItem/TaskItem.jsx` ist noch leer
+- [ ] `src/components/FilterBar/FilterBar.jsx` ist noch leer
 
----
+## Wichtig: Styling-Entscheidung
 
-## Phase 3: Ordnerstruktur anlegen (10 min)
+Das Projekt benutzt aktuell Tailwind CSS und DaisyUI direkt in den `className`-Attributen.
+Darum werden im aktuellen Stand keine CSS-Module wie `Header.module.css` oder `TaskForm.module.css` benötigt.
 
-- [ ] `src/components/Header/Header.jsx` erstellen
-- [ ] `src/components/Header/Header.module.css` erstellen
-- [ ] `src/components/TaskForm/TaskForm.jsx` erstellen
-- [ ] `src/components/TaskForm/TaskForm.module.css` erstellen
-- [ ] `src/components/TaskList/TaskList.jsx` erstellen
-- [ ] `src/components/TaskList/TaskList.module.css` erstellen
-- [ ] `src/components/TaskItem/TaskItem.jsx` erstellen
-- [ ] `src/components/TaskItem/TaskItem.module.css` erstellen
-- [ ] `src/components/FilterBar/FilterBar.jsx` erstellen
-- [ ] `src/components/FilterBar/FilterBar.module.css` erstellen
+- [x] Styling mit Tailwind/DaisyUI verwenden
+- [ ] Komponenten einheitlich mit Tailwind/DaisyUI stylen
+- [ ] Nur bei Bedarf später zusätzliche globale Styles in `App.css` oder `index.css` ergänzen
 
----
+## Nächster sinnvoller Schritt: State in `App.jsx`
 
-## Phase 4: Header-Komponente (15 min)
+- [ ] `useState` aus React importieren
+- [ ] `tasks` State anlegen:
 
-- [ ] `Header.jsx` schreiben – Titel, Beschreibung, Aufgaben-Anzahl, Erledigt-Anzahl
-- [ ] Props `total` und `done` von `App.jsx` entgegennehmen
-- [ ] `Header.module.css` stylen
-- [ ] Header in `App.jsx` importieren und einbinden
-- [ ] Props aus App-State an Header übergeben
-
----
-
-## Phase 5: State in App.jsx (15 min)
-
-- [ ] `useState` für `tasks` anlegen: `const [tasks, setTasks] = useState([])`
-- [ ] `useState` für `filter` anlegen: `const [filter, setFilter] = useState("all")`
-- [ ] `useState` für `isLoading` anlegen: `const [isLoading, setIsLoading] = useState(false)`
-- [ ] `useState` für `error` anlegen: `const [error, setError] = useState("")`
-- [ ] `react` importieren: `import { useState } from "react"`
-
----
-
-## Phase 6: TaskForm-Komponente (30 min)
-
-- [ ] Formular mit 4 Feldern: Titel, Beschreibung, Verantwortliche Person, Status
-- [ ] Lokalen Formular-State mit `useState` verwalten
-- [ ] `onChange` Handler für jedes Feld schreiben
-- [ ] `onSubmit` Handler schreiben
-- [ ] Validierung: leerer Titel → Fehlermeldung, kein Absenden
-- [ ] Nach Submit: Formular leeren
-- [ ] Funktion `onAdd` als Prop von `App.jsx` entgegennehmen
-- [ ] `addTask`-Funktion in `App.jsx` schreiben und per Props weitergeben
-- [ ] `TaskForm.module.css` stylen
-
----
-
-## Phase 7: TaskList & TaskItem (30 min)
-
-- [ ] `TaskList.jsx` – Liste mit `map()` rendern
-- [ ] Jedes `<TaskItem>` bekommt `key={task.id}`
-- [ ] Wenn keine Aufgaben: Nachricht "Keine Aufgaben vorhanden." anzeigen
-- [ ] `TaskItem.jsx` – Titel, Beschreibung, Verantwortliche Person, Status anzeigen
-- [ ] Status-Button: `open → in-progress → done → open`
-- [ ] Löschen-Button: Aufgabe entfernen
-- [ ] `changeStatus`-Funktion in `App.jsx` schreiben
-- [ ] `deleteTask`-Funktion in `App.jsx` schreiben
-- [ ] Beide Funktionen per Props an `TaskItem` weitergeben
-- [ ] `TaskList.module.css` und `TaskItem.module.css` stylen
-
----
-
-## Phase 8: FilterBar-Komponente (20 min)
-
-- [ ] 4 Filter-Buttons: Alle, Offen, In Bearbeitung, Erledigt
-- [ ] Aktiver Filter optisch hervorheben (z.B. andere Farbe)
-- [ ] `filter` State und `setFilter` Funktion als Props entgegennehmen
-- [ ] Gefilterte Aufgaben in `App.jsx` berechnen: `tasks.filter(...)`
-- [ ] Gefilterte Liste an `TaskList` übergeben
-- [ ] `FilterBar.module.css` stylen
-
----
-
-## Phase 9: useEffect & API-Aufruf (25 min)
-
-- [ ] `useEffect` und `useState` aus React importieren
-- [ ] API aufrufen: `https://jsonplaceholder.typicode.com/todos?_limit=5`
-- [ ] Geladene Daten in eigene Task-Struktur umwandeln:
   ```js
-  { id, title, description: "Imported demo task", assignee: "Demo User", status: todo.completed ? "done" : "open" }
+  const [tasks, setTasks] = useState([]);
   ```
-- [ ] `isLoading` auf `true` setzen vor dem Fetch, danach auf `false`
-- [ ] Bei Fehler: `error` State setzen
-- [ ] Dependency Array korrekt setzen: `useEffect(() => { ... }, [])`
-- [ ] Fallback-Daten vorbereiten für den Fall dass API fehlschlägt
 
----
+- [ ] `filter` State anlegen:
 
-## Phase 10: Bedingte Darstellung (15 min)
+  ```js
+  const [filter, setFilter] = useState("all");
+  ```
 
-- [ ] Loading-Meldung anzeigen wenn `isLoading === true`
-- [ ] Fehlermeldung anzeigen wenn `error !== ""`
-- [ ] Leere-Liste-Nachricht anzeigen wenn keine Aufgaben vorhanden
-- [ ] Status-Badge je nach Status unterschiedlich einfärben (open/in-progress/done)
+- [ ] `isLoading` State anlegen:
 
----
+  ```js
+  const [isLoading, setIsLoading] = useState(false);
+  ```
 
-## Phase 11: Styling & Feinschliff (40 min)
+- [ ] `error` State anlegen:
 
-- [ ] Kartenlayout für Aufgaben
-- [ ] Status-Farben klar erkennbar (z.B. grün = done, gelb = in-progress, grau = open)
-- [ ] Abstände zwischen Komponenten
-- [ ] Aktiver Filter visuell hervorheben
-- [ ] Kein reines Inline-Styling – CSS Modules oder normale CSS-Dateien nutzen
-- [ ] App auf verschiedenen Bildschirmbreiten testen
+  ```js
+  const [error, setError] = useState("");
+  ```
 
----
+- [ ] `total` aus `tasks.length` berechnen
+- [ ] `done` aus erledigten Tasks berechnen
+- [ ] Berechnete Werte an `Header` übergeben
 
-## Kann-Anforderungen (nur wenn Zeit bleibt)
+## TaskForm-Komponente
+
+- [ ] Formular mit Feldern erstellen: Titel, Beschreibung, Verantwortliche Person, Status
+- [ ] Lokalen Formular-State mit `useState` verwalten
+- [ ] `onChange` Handler schreiben
+- [ ] `onSubmit` Handler schreiben
+- [ ] Validierung: leerer Titel darf nicht abgesendet werden
+- [ ] Fehlermeldung bei leerem Titel anzeigen
+- [ ] Nach erfolgreichem Submit das Formular leeren
+- [ ] `onAdd` als Prop entgegennehmen
+- [ ] `addTask` Funktion in `App.jsx` schreiben
+- [ ] `TaskForm` in `App.jsx` anzeigen
+- [ ] Formular mit Tailwind/DaisyUI stylen
+
+## TaskList und TaskItem
+
+- [ ] `TaskList.jsx` mit Props `tasks`, `onStatusChange`, `onDelete` erstellen
+- [ ] Aufgaben mit `map()` rendern
+- [ ] Jedes `TaskItem` bekommt `key={task.id}`
+- [ ] Wenn keine Aufgaben vorhanden sind, Nachricht anzeigen
+- [ ] `TaskItem.jsx` mit Titel, Beschreibung, Verantwortlicher Person und Status erstellen
+- [ ] Status-Badge anzeigen
+- [ ] Status-Button erstellen: `open -> in-progress -> done -> open`
+- [ ] Delete-Button erstellen
+- [ ] `changeStatus` Funktion in `App.jsx` schreiben
+- [ ] `deleteTask` Funktion in `App.jsx` schreiben
+- [ ] `TaskList` in `App.jsx` anzeigen
+- [ ] Task-Karten mit Tailwind/DaisyUI stylen
+
+## FilterBar-Komponente
+
+- [ ] Filter-Buttons erstellen: Alle, Offen, In Bearbeitung, Erledigt
+- [ ] Aktiven Filter optisch hervorheben
+- [ ] `filter` und `setFilter` als Props entgegennehmen
+- [ ] Gefilterte Aufgaben in `App.jsx` berechnen
+- [ ] Gefilterte Liste an `TaskList` übergeben
+- [ ] `FilterBar` in `App.jsx` anzeigen
+- [ ] FilterBar mit Tailwind/DaisyUI stylen
+
+## API und useEffect
+
+- [ ] `useEffect` aus React importieren
+- [ ] API aufrufen:
+
+  ```txt
+  https://jsonplaceholder.typicode.com/todos?_limit=5
+  ```
+
+- [ ] Geladene Daten in eigene Task-Struktur umwandeln:
+
+  ```js
+  {
+    id,
+    title,
+    description: "Imported demo task",
+    assignee: "Demo User",
+    status: todo.completed ? "done" : "open"
+  }
+  ```
+
+- [ ] Vor dem Fetch `isLoading` auf `true` setzen
+- [ ] Nach dem Fetch `isLoading` auf `false` setzen
+- [ ] Bei Fehler `error` setzen
+- [ ] Dependency Array korrekt setzen:
+
+  ```js
+  useEffect(() => {
+    // fetch tasks
+  }, []);
+  ```
+
+- [ ] Fallback-Daten vorbereiten, falls API nicht erreichbar ist
+
+## Bedingte Darstellung
+
+- [ ] Loading-Meldung anzeigen, wenn `isLoading === true`
+- [ ] Fehlermeldung anzeigen, wenn `error !== ""`
+- [ ] Leere-Liste-Nachricht anzeigen, wenn keine Aufgaben vorhanden sind
+- [ ] Status-Badge je nach Status unterschiedlich einfärben
+
+## Feinschliff
+
+- [ ] Layout auf Desktop prüfen
+- [ ] Layout auf Mobile prüfen
+- [ ] Abstände zwischen Komponenten verbessern
+- [ ] Buttons einheitlich stylen
+- [ ] Status-Farben klar erkennbar machen
+- [ ] Unnötige leere JSX-Blöcke in `App.jsx` entfernen:
+
+  ```jsx
+  {}
+  ```
+
+- [ ] Final prüfen mit:
+
+  ```bash
+  npm run build
+  ```
+
+## Kann-Anforderungen
 
 - [ ] Aufgaben nach Status zählen und anzeigen
 - [ ] Button zum Zurücksetzen auf Demo-Daten
@@ -139,14 +174,12 @@
 - [ ] Sortierung nach Status
 - [ ] Dark/Light Toggle
 
----
+## Präsentation vorbereiten
 
-## Präsentation vorbereiten (10 min)
-
-- [ ] Welche Komponenten habt ihr erstellt?
-- [ ] Wo nutzt ihr Props?
-- [ ] Wo nutzt ihr State?
-- [ ] Welche Events verarbeitet eure App?
+- [ ] Welche Komponenten wurden erstellt?
+- [ ] Wo werden Props genutzt?
+- [ ] Wo wird State genutzt?
+- [ ] Welche Events verarbeitet die App?
 - [ ] Wo wird `useEffect` genutzt?
-- [ ] Welche Fehler hattet ihr und wie habt ihr sie gelöst?
-- [ ] Was würdet ihr verbessern, wenn ihr mehr Zeit hättet?
+- [ ] Welche Fehler gab es und wie wurden sie gelöst?
+- [ ] Was kann später verbessert werden?
