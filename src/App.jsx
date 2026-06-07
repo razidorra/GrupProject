@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import TaskList from "./components/TaskList/TaskList";
 import TaskItem from "./components/TaskItem/TaskItem";
+import TaskForm from "./components/TaskForm/TaskForm";
 import FilterBar from "./components/FilterBar/FilterBar";
 
 function App() {
@@ -46,6 +47,19 @@ function App() {
   const handleDeleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
+
+  // Add new task (used by TaskForm)
+  function addTask(task) {
+    const newTasks = [];
+
+    newTasks.push(task);
+
+    for (let i = 0; i < tasks.length; i++) {
+      newTasks.push(tasks[i]);
+    }
+
+    setTasks(newTasks);
+  }
 
   const total = tasks.length;
   const done = tasks.filter((t) => t.status === "done").length;
@@ -99,24 +113,28 @@ function App() {
     <>
       <div className="min-h-screen bg-base-200">
         <Header total={total} done={done} />
+
+        <TaskForm addTask={addTask} />
+
+        <FilterBar filter={filter} onFilterChange={setFilter} />
+
+        <TaskList
+          tasks={filteredTasks}
+          onStatusChange={handleToggleStatus}
+          onDelete={handleDeleteTask}
+        />
+        <TaskItem
+          task={{
+            id: 999,
+            title: "Example Task",
+            description: "This is an example task description.",
+            assignee: "John Doe",
+            status: "open",
+          }}
+          onStatusChange={() => {}}
+          onDelete={() => {}}
+        />
       </div>
-      <FilterBar filter={filter} onFilterChange={setFilter} />
-      <TaskList
-        tasks={filteredTasks}
-        onStatusChange={handleToggleStatus}
-        onDelete={handleDeleteTask}
-      />
-      <TaskItem
-        task={{
-          id: 999,
-          title: "Example Task",
-          description: "This is an example task description.",
-          assignee: "John Doe",
-          status: "open",
-        }}
-        onStatusChange={() => {}}
-        onDelete={() => {}}
-      />
     </>
   );
 }
