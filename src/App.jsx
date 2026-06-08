@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import TaskList from "./components/TaskList/TaskList";
-import TaskItem from "./components/TaskItem/TaskItem";
 import TaskForm from "./components/TaskForm/TaskForm";
 import FilterBar from "./components/FilterBar/FilterBar";
 
@@ -32,8 +31,7 @@ function App() {
           }
 
           return {
-            id: task.id,
-            title: task.title,
+            ...task,
             status: nextStatus,
           };
         }
@@ -110,32 +108,25 @@ function App() {
   }, []); // Empty array = runs once on mount
 
   return (
-    <>
-      <div className="min-h-screen bg-base-200">
-        <Header total={total} done={done} />
+    <div className="min-h-screen bg-base-200">
+      <Header total={total} done={done} />
 
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 py-6 sm:px-6 lg:px-8">
         <TaskForm addTask={addTask} />
 
-        <FilterBar filter={filter} onFilterChange={setFilter} />
+        <FilterBar
+          filter={filter}
+          tasks={tasks}
+          onFilterChange={setFilter}
+        />
 
         <TaskList
           tasks={filteredTasks}
           onStatusChange={handleToggleStatus}
           onDelete={handleDeleteTask}
         />
-        <TaskItem
-          task={{
-            id: 999,
-            title: "Example Task",
-            description: "This is an example task description.",
-            assignee: "John Doe",
-            status: "open",
-          }}
-          onStatusChange={() => {}}
-          onDelete={() => {}}
-        />
-      </div>
-    </>
+      </main>
+    </div>
   );
 }
 

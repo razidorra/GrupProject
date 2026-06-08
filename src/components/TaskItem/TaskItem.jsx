@@ -8,42 +8,43 @@ function TaskItem({ task, onStatusChange, onDelete }) {
   }
 
   return (
-    <div className="card bg-base-100 shadow-md p-4 flex flex-col gap-2">
-      {/* Top row: title on the left, status badge on the right */}
-      <div className="flex justify-between items-start">
-        <h3 className="font-bold text-lg">{task.title}</h3>
-        <span className={`badge ${getStatusColor(task.status)}`}>
+    <article className="card h-full border border-base-300 bg-base-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+      <div className="card-body gap-3 p-4 sm:p-5">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="min-w-0 break-words text-base font-bold leading-snug sm:text-lg">
+            {task.title}
+          </h3>
+          <span className={`badge shrink-0 ${getStatusColor(task.status)}`}>
           {task.status}
-        </span>
+          </span>
+        </div>
+
+        <p className="min-h-10 break-words text-sm leading-6 opacity-70">
+          {task.description || "No description added."}
+        </p>
+
+        <div className="mt-auto flex flex-col gap-3 pt-2">
+          <p className="text-sm font-medium opacity-80">
+            Assigned to: {task.assignee || "Unassigned"}
+          </p>
+
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <button
+              onClick={() => onStatusChange(task.id)}
+              className="btn btn-sm btn-outline"
+            >
+              Next Status
+            </button>
+            <button
+              onClick={() => onDelete(task.id)}
+              className="btn btn-sm btn-error btn-outline"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
-
-      {/* Description text */}
-      <p className="text-sm opacity-70">{task.description}</p>
-
-      {/* Assigned person */}
-      <p className="text-sm">👤 {task.assignee}</p>
-
-      {/* Action buttons at the bottom */}
-      <div className="flex gap-2 mt-2">
-        {/* Clicking this calls onStatusChange with the task's id */}
-        {/* App.jsx will then cycle the status: open → in-progress → done → open */}
-        <button
-          onClick={() => onStatusChange(task.id)}
-          className="btn btn-sm btn-outline"
-        >
-          Next Status
-        </button>
-
-        {/* Clicking this calls onDelete with the task's id */}
-        {/* App.jsx will then remove this task from the list */}
-        <button
-          onClick={() => onDelete(task.id)}
-          className="btn btn-sm btn-error btn-outline"
-        >
-          Delete
-        </button>
-      </div>
-    </div>
+    </article>
   );
 }
 

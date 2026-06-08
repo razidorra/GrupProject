@@ -1,36 +1,33 @@
-function FilterBar({ filter, onFilterChange }) {
+const filters = [
+  { label: "All", value: "all" },
+  { label: "Open", value: "open" },
+  { label: "In Progress", value: "in-progress" },
+  { label: "Done", value: "done" },
+];
+
+function FilterBar({ filter, tasks, onFilterChange }) {
+  function getCount(value) {
+    if (value === "all") return tasks.length;
+
+    return tasks.filter((task) => task.status === value).length;
+  }
+
   return (
-    <div className="flex gap-2 my-4 flex-wrap">
-      {/* Each button calls onFilterChange with its filter value when clicked */}
-      {/* If this button is the active one, it gets btn-primary style, otherwise btn-outline */}
-
-      <button
-        onClick={() => onFilterChange("all")}
-        className={`btn btn-sm ${filter === "all" ? "btn-primary" : "btn-outline"}`}
-      >
-        All
-      </button>
-
-      <button
-        onClick={() => onFilterChange("open")}
-        className={`btn btn-sm ${filter === "open" ? "btn-primary" : "btn-outline"}`}
-      >
-        Open
-      </button>
-
-      <button
-        onClick={() => onFilterChange("in-progress")}
-        className={`btn btn-sm ${filter === "in-progress" ? "btn-primary" : "btn-outline"}`}
-      >
-        In Progress
-      </button>
-
-      <button
-        onClick={() => onFilterChange("done")}
-        className={`btn btn-sm ${filter === "done" ? "btn-primary" : "btn-outline"}`}
-      >
-        Done
-      </button>
+    <div className="rounded-box border border-base-300 bg-base-100 p-2 shadow-sm">
+      <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+        {filters.map((item) => (
+          <button
+            key={item.value}
+            onClick={() => onFilterChange(item.value)}
+            className={`btn btn-sm justify-between gap-3 sm:min-w-32 ${
+              filter === item.value ? "btn-primary" : "btn-ghost"
+            }`}
+          >
+            <span className="truncate">{item.label}</span>
+            <span className="badge badge-sm">{getCount(item.value)}</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
